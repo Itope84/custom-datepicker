@@ -37,7 +37,7 @@
   </div>
 </template>
 <script lang="ts">
-import Vue from 'vue';
+import Vue, { PropType } from 'vue';
 import ChevronLeft from './svgs/chevron-left.svg';
 import ChevronRight from './svgs/chevron-right.svg';
 import DatepickerModal from './DatepickerModal.vue';
@@ -51,6 +51,19 @@ const DatePicker = Vue.extend({
     placeholder: {
       type: String,
       default: 'Click to select date range',
+    },
+    value: {
+      type: Array as PropType<Array<number>>,
+      default: () => [],
+    },
+  },
+  watch: {
+    dates: {
+      immediate: true,
+      deep: true,
+      handler(val, prev) {
+        if (val !== prev) this.$emit('input', val);
+      },
     },
   },
   components: {

@@ -1,9 +1,9 @@
 <template>
   <div class="app">
-    <span class="message">Have fun!</span>
+    <span class="message">{{getSelectedDateString}}</span>
     <div class="flex">
       <div class="picker-section">
-        <date-picker></date-picker>
+        <date-picker v-model="dates"></date-picker>
       </div>
     </div>
   </div>
@@ -12,11 +12,23 @@
 <script lang="ts">
 import Vue from 'vue';
 import DatePicker from './library';
+import { getDateString } from './utils/dates';
 
 export default Vue.extend({
   name: 'App',
   components: {
     DatePicker,
+  },
+  data() {
+    return {
+      dates: [] as Date[],
+    };
+  },
+  computed: {
+    getSelectedDateString(): string | null {
+      if (!this.dates?.length) return null;
+      return this.dates.map((date) => getDateString(date)).join(' - ');
+    },
   },
 });
 </script>
