@@ -1,6 +1,6 @@
 // eslint-disable-next-line arrow-body-style
 export const getDateString = (date: Date): string => {
-  return `${date.getFullYear()}/${`${date.getMonth()}`.padStart(
+  return `${date.getFullYear()}/${`${date.getMonth() + 1}`.padStart(
     2,
     '0',
   )}/${`${date.getDate()}`.padStart(2, '0')}`;

@@ -28,19 +28,11 @@
       </button>
     </div>
 
-    <div
-      class="j-datepicker--picker"
+    <datepicker-modal
       v-if="showPicker"
-    >
-      <b-datepicker
-        v-model="dates"
-        inline
-        :min-date="minDate"
-        :max-date="maxDate"
-        range
-      >
-      </b-datepicker>
-    </div>
+      v-model="dates"
+      @close="closePicker"
+    ></datepicker-modal>
 
   </div>
 </template>
@@ -48,6 +40,8 @@
 import Vue from 'vue';
 import ChevronLeft from './svgs/chevron-left.svg';
 import ChevronRight from './svgs/chevron-right.svg';
+import DatepickerModal from './DatepickerModal.vue';
+
 import clickOutside from './directives/click-outside';
 import { getDateString, getDiffDays } from './utils/dates';
 
@@ -62,6 +56,7 @@ const DatePicker = Vue.extend({
   components: {
     ChevronLeft,
     ChevronRight,
+    DatepickerModal,
   },
   directives: {
     clickOutside,
@@ -109,87 +104,3 @@ const DatePicker = Vue.extend({
 
 export default DatePicker;
 </script>
-<style lang="scss">
-@import './styles.scss';
-
-.j-datepicker {
-  position: relative;
-
-  &--input {
-    &__wrapper {
-      display: flex;
-      // border: 2px solid transparent;
-      border-radius: 4px;
-      &:focus-within {
-        // border-color: darken($color: #2f3544, $amount: 10);
-      }
-      align-items: stretch;
-    }
-
-    flex: 1;
-    input {
-      background-color: #292f33;
-      color: #91929e;
-      box-shadow: none !important;
-      border: 2px solid transparent;
-      width: 100%;
-      flex-basis: 100%;
-      height: 40px;
-      cursor: pointer;
-      padding: 8px;
-
-      &::placeholder {
-        color: #91929e;
-      }
-      border-radius: 0px;
-
-      &:hover {
-        border-color: transparent;
-        background-color: darken($color: #2f3544, $amount: 10);
-      }
-
-      &:focus {
-        outline: none;
-        background-color: darken($color: #2f3544, $amount: 10);
-        border-color: transparent;
-      }
-    }
-  }
-
-  &--nav {
-    background-color: #2f3544;
-    box-shadow: none;
-    color: #fff;
-    border: none;
-    width: 36px;
-    text-align: center;
-    cursor: pointer;
-
-    &:focus {
-      outline: none;
-      border-color: transparent;
-      background-color: darken($color: #2f3544, $amount: 10);
-    }
-
-    &:hover {
-      background-color: darken($color: #2f3544, $amount: 10);
-    }
-
-    &.left {
-      border-top-left-radius: 4px;
-      border-bottom-left-radius: 4px;
-    }
-    &.right {
-      border-top-right-radius: 4px;
-      border-bottom-right-radius: 4px;
-    }
-  }
-
-  &--picker {
-    position: absolute;
-    top: 0;
-    // display: none;
-    // transform: 0;
-  }
-}
-</style>
