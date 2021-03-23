@@ -20,10 +20,16 @@ npm run build
 npm run test:unit
 ```
 
-### Lints and fixes files
-```
-npm run lint
+### Usage
+
+The component had been built in such a way that it can be imported and used in any project. Simple import the component from library.ts
+
+```javascript
+import DatePicker from '/path/src/library'
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+and you can use it like
+
+```javascript
+<date-picker v-model="dates"></date-picker>
+```
